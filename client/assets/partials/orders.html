@@ -1,0 +1,82 @@
+<div ng-controller="dashboardController">
+
+  <!--New Order Section-->
+  <h1>Orders</h1>
+  <div class="center">
+    <button ng-show="!clicked" ng-click="clicked = true" class="btn-flat green"> Add A New Order</button>
+  </div>
+  <div ng-show="clicked">
+    <form name="orderForm" novalidate>
+      <label for="customer">Select A Customer</label>
+      <select type="text" name="customer" id="customer" ng-model="data.customer" ng-required="orderForm">
+        <option disabled value="">Select A Customer</option>
+        <option ng-repeat="customer in customers | orderBy:'name'" ng-value="customer" ng-bind="customer.name"></option>
+      </select>
+      <ul>
+        <!--Form Validation Message-->
+        <li class="red-text" ng-if="orderForm.$submitted && !orderForm.customer.$valid">Customer is required</li>
+      </ul>
+      <label for="product">Select A Product</label>
+      <select type="text" name="product" id="product" ng-model="data.product" ng-required="orderForm">
+        <option disabled value="">Select A Product</option>
+        <option ng-repeat="product in products | orderBy:'name' " ng-value="product" ng-bind="product.name"></option>
+      </select>
+      <ul>
+        <!--Form Validation Message-->
+        <li class="red-text" ng-if="orderForm.$submitted && !orderForm.product.$valid">Product is required</li>
+      </ul>
+      <!--If quantity over 1 Display slider-->
+      <div ng-hide="data.product.quantity < 1">
+        <label for="quantity" ng-if="">Select A Quantity Max: {{data.product.quantity}} For This Product</label>
+        <input name="quantity" ng-model="data.quantity" type="range" id="quantity" min="1" max="{{data.product.quantity}}">
+        <h5 ng-if="data.quantity > 0"><strong>Quantity Selected: </strong>{{data.quantity}}</h5>
+      </div>
+      <!--If Out Of Stock also Disable Order Button-->
+      <div ng-show="data.product.quantity < 1">
+          <h5>Sorry This Product Is Out Of Stock</h5>
+      </div>
+      <button ng-disabled="data.product.quantity < 1" type="submit" class="btn-flat green" ng-click="submitOrder()">Submit Order</button>
+      <button type="submit" ng-click="resetOrder()" class="btn-flat red">Cancel Order</button>
+    </form>
+  </div>
+
+  <!--All Orders Section-->
+  <div>
+    <h4>Ordered Products</h4>
+    <div class="row">
+      <div>
+        <input ng-model="orderSearch.$" placeholder="Filter All">
+      </div>
+      <div>
+        <input ng-model="orderSearch.quantity" placeholder="Filter Quantity">
+      </div>
+    </div>
+    <table class="centered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="order in orders | filter:orderSearch:strict">
+        <td>{{order._customer[0].name}}</td>
+        <td>{{order._product[0].name}}</td>
+        <td>{{order.quantity}}</td>
+        <td>{{order.createdAt | date:'EEEE MMMM dd yyyy  h:m a'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!--Bottom of page spacer-->
+  <h1>&nbsp;</h1>
+</div>
+
+<script>
+    $(document).on('click',function() {
+        $('select').material_select();
+    });
+</script>

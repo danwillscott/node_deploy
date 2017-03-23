@@ -1,0 +1,21 @@
+{
+  "name": "mini_mean_store",
+  "homepage": "https://github.com/danwillscott/learn_full_mean",
+  "authors": [
+    "danwillscott <danwillscott@gmail.com>"
+  ],
+  "description": "sample mini store with angular and express",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-route": "^1.6.3"
+  }
+}
