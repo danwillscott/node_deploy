@@ -5,6 +5,8 @@ console.log('Server: mongoose.js File Loaded');
 
 // require mongoose
 const mongoose = require('mongoose');
+let uniqueValidator = require('mongoose-unique-validator');
+mongoose.plugin(uniqueValidator, { message: '{PATH} Must Be Unique.' });
 // require the fs module for loading model files
 const fs = require('fs');
 // require path for getting the models path

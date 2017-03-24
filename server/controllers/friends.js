@@ -15,9 +15,6 @@ module.exports = {
                 res.json({result: results, error: false});
             }
         });
-
-
-
     },
 
     create: function(req,res){

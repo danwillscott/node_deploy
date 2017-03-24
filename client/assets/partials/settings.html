@@ -1,4 +1,4 @@
-<div ng-controller="dashboardController">
+<div ng-controller="settingsController">
   <div class="row">
     <div class="card large grey lighten-2">
       <div class="card-content">
@@ -34,7 +34,7 @@
 
 
         <ul>
-          <li>{{controller_session}}</li>
+          <li>{{cookies.get('user')}}</li>
         </ul>
         <label for="change_session"></label>
         <input ng-model="name" id="change_session" >

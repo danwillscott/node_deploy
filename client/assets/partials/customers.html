@@ -3,9 +3,13 @@
 
   <!--New Customer Section-->
   <div class="row">
-    <form class="col s5">
+    <form name="customerForm" novalidate class="col s5">
       <label for="name">Customer Name</label>
-      <input placeholder="Name.." id="name" type="text" ng-model="newCustomer.name">
+      <input name="customer" placeholder="Name.." id="name" type="text" ng-model="newCustomer.name" ng-required="customerForm">
+      <ul>
+        <!--<li ng-if="customerForm.$submitted && !customerForm.customer.$valid" class="red-text">Customer Name Required</li>-->
+        <li ng-if="customerErrors.error" class="red-text" ng-bind="customerErrors.message"></li>
+      </ul>
       <button type="submit" class="btn-flat blue accent-3" ng-click="createCustomer()">Submit Customer</button>
     </form>
     <div class="col s2"> </div>

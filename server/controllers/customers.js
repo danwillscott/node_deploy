@@ -23,7 +23,7 @@ module.exports = {
         console.log(req.body);
         Customer.create(req.body, function (err, result) {
             if(err){
-                res.json({result: result, error: result.errors})
+                res.json({result: err, error: true})
             } else {
                 res.json({result: result, error: false});
             }
@@ -35,7 +35,7 @@ module.exports = {
         Customer.remove({_id: req.params.id}, function (err) {
             if(err){
                 console.log('Server: Error Deleting User');
-                res.json({error: true});
+                res.json({result: err, error: true});
             } else {
                 console.log('Server: Customer Deleted');
                 res.json({error: false})

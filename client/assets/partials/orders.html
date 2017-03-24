@@ -12,19 +12,23 @@
         <option disabled value="">Select A Customer</option>
         <option ng-repeat="customer in customers | orderBy:'name'" ng-value="customer" ng-bind="customer.name"></option>
       </select>
+
+      <!--Form Validation Message-->
       <ul>
-        <!--Form Validation Message-->
         <li class="red-text" ng-if="orderForm.$submitted && !orderForm.customer.$valid">Customer is required</li>
       </ul>
+
       <label for="product">Select A Product</label>
       <select type="text" name="product" id="product" ng-model="data.product" ng-required="orderForm">
         <option disabled value="">Select A Product</option>
         <option ng-repeat="product in products | orderBy:'name' " ng-value="product" ng-bind="product.name"></option>
       </select>
+
+      <!--Form Validation Message-->
       <ul>
-        <!--Form Validation Message-->
         <li class="red-text" ng-if="orderForm.$submitted && !orderForm.product.$valid">Product is required</li>
       </ul>
+
       <!--If quantity over 1 Display slider-->
       <div ng-hide="data.product.quantity < 1">
         <label for="quantity" ng-if="">Select A Quantity Max: {{data.product.quantity}} For This Product</label>

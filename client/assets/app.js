@@ -1,7 +1,7 @@
 /**
  * Created by danielscott on 3/20/17.
  */
-let app = angular.module('managerApp', ['ngRoute']);
+let app = angular.module('managerApp', ['ngRoute', 'ngCookies']);
 
 app.config(function ($routeProvider) {
     $routeProvider

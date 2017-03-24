@@ -147,11 +147,11 @@ app.factory('productFactory', ['$http', function ($http) {
 }]);
 
 
+app.factory('settingsFactory', ['$http', function ($http) {
+    let factory = {};
 
-
-
-
-
+    return factory
+}]);
 
 
 

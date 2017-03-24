@@ -5,13 +5,8 @@
 // ********************************
 // ***** Dashboard Controller *****
 // ********************************
-fake_session = {name: "Daniel", id: 1241245};
-app.controller('dashboardController', ['dashboardFactory', '$scope', '$location', function (dashboardFactory, $scope, $location) {
-   $scope.controller_session = fake_session;
-   console.log($scope.controller_session);
-   $scope.setSession = function (name) {
-        fake_session.name = name
-   };
+app.controller('dashboardController', ['dashboardFactory', '$scope', '$cookies', function (dashboardFactory, $scope, $cookies) {
+
 
     // Dashboard
     // This sets the dashboard as soon as the page loads
@@ -73,23 +68,39 @@ app.controller('dashboardController', ['dashboardFactory', '$scope', '$location'
 // ***** Customer Controller *****
 // *******************************
 
-app.controller('customerController', ['customerFactory', '$scope', '$location', function (customerFactory, $scope, $location) {
+app.controller('customerController', ['customerFactory', '$scope', '$cookies', function (customerFactory, $scope, $cookies) {
     console.log('Client: Dashboard Controller');
     $scope.newCustomer = {};
+    $scope.customerErrors = {};
 
     $scope.allCustomers = function () {
         customerFactory.getCustomers(function (customers) {
-            console.log(customers.data);
             $scope.customers = customers.data
         });
     };
     $scope.allCustomers();
 
     $scope.createCustomer = function () {
-        customerFactory.createCustomer($scope.newCustomer, function (data) {
-            $scope.newCustomer = {};
-            $scope.allCustomers();
-        })
+        if($scope.isValidForm()){
+            customerFactory.createCustomer($scope.newCustomer, function (data) {
+                if(data.data.error){
+                    $scope.customerErrors.error = true;
+                    $scope.customerErrors.message = data.data.result.errors.name.message;
+                } else {
+                    $scope.customerErrors.error = false;
+                    $scope.customerErrors.message = '';
+                    $scope.customerForm = null;
+                    $scope.newCustomer = {};
+                    $scope.allCustomers();
+                }
+            })
+        }
+    };
+
+    $scope.isValidForm = function () {
+        // return !$scope.customerForm.$invalid;
+        return true;
+
     };
 
     $scope.deleteCustomer = function (customerId) {
@@ -103,7 +114,7 @@ app.controller('customerController', ['customerFactory', '$scope', '$location', 
 // ***** Product Controller *****
 // ******************************
 
-app.controller('productController', ['productFactory', '$scope', '$location', function (productFactory, $scope, $location) {
+app.controller('productController', ['productFactory', '$scope', '$cookies', function (productFactory, $scope, $cookies) {
     console.log('Client: Product Controller');
     $scope.newProduct = {};
 
@@ -135,6 +146,13 @@ app.controller('productController', ['productFactory', '$scope', '$location', fu
 // ***** Settings Controller *****
 // *******************************
 
-app.controller()
+app.controller('settingsController', ['settingsFactory', '$scope', '$location', '$cookies', function (settingsFactory, $scope, $location, $cookies) {
+    $scope.cookies = $cookies;
+    $scope.setSession = function(name){
+        $cookies.put('user', name)
+    };
+    console.log($cookies.get('user'));
+    console.log($cookies);
+}]);
 
 

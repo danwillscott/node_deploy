@@ -11,7 +11,7 @@ console.log('Server: Index controller');
 
 module.exports = {
     show: function (req, res) {
-
+        // console.log(req.sessionID);
 
         console.log('Server: index dashboard active');
         Product.find({}, function (pErr, product) {

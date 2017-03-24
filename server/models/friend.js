@@ -6,7 +6,7 @@ console.log('Server: Friend model connected');
 let mongoose = require('mongoose');
 
 let FriendSchema = new mongoose.Schema({
-    firstName: String,
+    name: {type: String, unique: true},
     lastName: String,
     dob: Date
 }, {
