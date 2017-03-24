@@ -1,0 +1,38 @@
+<div ng-controller="pollController">
+  <div class="col s3">
+    <h5>Add A Poll </h5>
+    <h5>Logged In As {{userName}} </h5>
+    <a class="btn-flat green" href="#!/dashboard">Cancel</a>
+    <form>
+
+      <label for="poll">Enter Question</label>
+      <input id="poll" placeholder="Question" ng-model="newPoll.question">
+      <ul>
+        <li ng-if="pollErrors.question" ng-bind="pollErrors.question.message"></li>
+      </ul>
+      <label for="option1">Option 1</label>
+      <input id="option1" placeholder="Option 1" ng-model="newPoll.option1">
+      <ul>
+        <li ng-if="pollErrors.option1" ng-bind="pollErrors.option1.message"></li>
+      </ul>
+      <label for="option2">Option 2</label>
+      <input id="option2" placeholder="Option 2" ng-model="newPoll.option2">
+      <ul>
+        <li ng-if="pollErrors.option2" ng-bind="pollErrors.option2.message"></li>
+      </ul>
+      <label for="option3">Option 3</label>
+      <input id="option3" placeholder="Option 3" ng-model="newPoll.option3">
+      <ul>
+        <li ng-if="pollErrors.option3" ng-bind="pollErrors.option3.message"></li>
+      </ul>
+      <label for="option4">Option 4</label>
+      <input id="option4" placeholder="Option 4" ng-model="newPoll.option4">
+      <ul>
+        <li ng-if="pollErrors.option4" ng-bind="pollErrors.option4.message"></li>
+      </ul>
+      <button type="submit" class="btn-flat waves-effect green-text grey lighten-3" ng-click="createPoll()">Add Poll</button>
+    </form>
+  </div>
+
+
+</div>

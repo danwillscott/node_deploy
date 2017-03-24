@@ -13,6 +13,8 @@ const fs = require('fs');
 const path = require('path');
 // connect to mongoose!
 mongoose.connect('mongodb://localhost/products_store');// create a variable that points to the path where all of the models live
+// mongoose.connect('mongodb://app:myPassword@localhost/appDB'); // TODO uncomment for deployment
+
 let models_path = path.join(__dirname, './../models');
 // read all of the files in the models_path and require (run) each of the javascript files
 fs.readdirSync(models_path).forEach(function(file) {

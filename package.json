@@ -15,7 +15,6 @@
     "express-session": "^1.15.1",
     "mongoose": "^4.9.1",
     "mongoose-unique-validator": "^1.0.5",
-    "path": "^0.12.7",
-    "uid-safe": "^2.1.4"
+    "path": "^0.12.7"
   }
 }

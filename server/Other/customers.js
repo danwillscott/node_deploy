@@ -4,7 +4,7 @@
 
 let mongoose = require('mongoose');
 let Customer = mongoose.model('Customer');
-console.log('Server: Customer controller');
+console.log('Server: User controller');
 
 module.exports = {
     show: function (req, res) {

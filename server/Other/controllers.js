@@ -5,7 +5,28 @@
 // ********************************
 // ***** Dashboard Controller *****
 // ********************************
-app.controller('dashboardController', ['dashboardFactory', '$scope', '$cookies', function (dashboardFactory, $scope, $cookies) {
+
+// remember the order.
+// html base runs all js files loaded angular app serves up partial based on route in ng-view
+// The partial calls the controller set on the top of the controller
+// the controller talks to the factory to get information back
+// the factory makes a request that the node/express app handles in routes
+// the routes direct to the server controller
+// the server controller talks to the mongoose.js file and the model required in the controller
+// then the controller using a promise sends the information back down the tree via json
+// the json goes back to the factory (since the route is already set)
+// the factory returns the json to the controller via a callback
+// then the controller sets the data inside the returned callback to be served to the HTML
+// Mission complete
+
+// Once routes and models are set the only concern is the fallowing
+// Html to ng-controller to ng-factory
+// Ng-factory to server-controller to mongo
+// handle errors by returning errors and checking if errors
+// display errors or display content.
+// Unlock Code bQGYq2tD
+
+app.controller('dashController', ['dashboardFactory', '$scope', '$cookies', function (dashboardFactory, $scope, $cookies) {
 
 
     // Dashboard
@@ -97,12 +118,14 @@ app.controller('customerController', ['customerFactory', '$scope', '$cookies', f
         }
     };
 
+    // No Longer needed. Validation comes from the back
     $scope.isValidForm = function () {
         // return !$scope.customerForm.$invalid;
         return true;
 
     };
 
+    // this does a call back to delete customers then pulls customers again.
     $scope.deleteCustomer = function (customerId) {
         customerFactory.deleteCustomer(customerId, function () {
             $scope.allCustomers();
@@ -118,6 +141,7 @@ app.controller('productController', ['productFactory', '$scope', '$cookies', fun
     console.log('Client: Product Controller');
     $scope.newProduct = {};
 
+    // using a call back pulls all products through factory route then server controller.
     $scope.allProducts = function () {
         productFactory.getProducts(function (products) {
             console.log(products);
@@ -142,17 +166,24 @@ app.controller('productController', ['productFactory', '$scope', '$cookies', fun
 }]);
 
 
+
+
+
+
 // *******************************
 // ***** Settings Controller *****
 // *******************************
-
+// Moved to messageController.js Revert to settings page later
 app.controller('settingsController', ['settingsFactory', '$scope', '$location', '$cookies', function (settingsFactory, $scope, $location, $cookies) {
     $scope.cookies = $cookies;
+    $scope.sessionForm = {};
     $scope.setSession = function(name){
-        $cookies.put('user', name)
+        $cookies.put('user', name);
+        $scope.name = '';
+        $scope.sessionForm = {};
     };
+
     console.log($cookies.get('user'));
-    console.log($cookies);
 }]);
 
 

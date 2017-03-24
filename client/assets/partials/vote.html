@@ -1,0 +1,39 @@
+<div ng-controller="pollController">
+  <h4>{{onePoll.question}}</h4>
+  <a class="btn-flat green" href="#!/dashboard">Dashboard</a>
+  <table class="centered">
+    <thead>
+    <tr>
+      <th>Option</th>
+      <th>Current Votes</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td ng-bind="onePoll.option1"></td>
+      <td ng-if="onePoll.vote1" ng-bind="onePoll.vote1"></td>
+      <td ng-if="!onePoll.vote1" ng-bind="0"></td>
+      <td><button class="btn-flat green" ng-click="votePoll(1, onePoll._id)">Vote</button></td>
+    </tr>
+    <tr>
+      <td ng-bind="onePoll.option2"></td>
+      <td ng-if="onePoll.vote2" ng-bind="onePoll.vote2"></td>
+      <td ng-if="!onePoll.vote2" ng-bind="0"></td>
+      <td><button class="btn-flat green" ng-click="votePoll(2, onePoll._id)">Vote</button></td>
+    </tr>
+    <tr ng-init="">
+      <td ng-bind="onePoll.option3"></td>
+      <td ng-if="onePoll.vote3" ng-bind="onePoll.vote3"></td>
+      <td ng-if="!onePoll.vote3" ng-bind="0"></td>
+      <td><button class="btn-flat green" ng-click="votePoll(3, onePoll._id)">Vote</button></td>
+    </tr>
+    <tr>
+      <td ng-bind="onePoll.option4"></td>
+      <td ng-if="onePoll.vote4" ng-bind="onePoll.vote4"></td>
+      <td ng-if="!onePoll.vote4" ng-bind="0"></td>
+      <td><button class="btn-flat green" ng-click="votePoll(4, onePoll._id)">Vote</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
